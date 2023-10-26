@@ -1,12 +1,21 @@
+function myFunction() {
+  // Inicialize a API do Google Sheets
+function init() {
+    gapi.client.init({
+        apiKey: 'AIzaSyAuv-HmunKG_-4ihTcdY8xC20swKCUCw_g',
+        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+    }).then(function() {
+        // API inicializada com sucesso
+    });
+}
+
 // Função para pesquisar a nota fiscal
 function pesquisarNotaFiscal() {
     const notaFiscal = document.getElementById('notaFiscalInput').value;
-    const planilhaId = 'ID_DA_PLANILHA'; // Substitua pelo ID da sua planilha
-    const range = 'A:B'; // Substitua pelo intervalo que contém os dados da nota fiscal e status
-
+    
     gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: planilhaId,
-        range: range
+        spreadsheetId: '1kgm4UfvxRqhxhCa9oFJVKFsrdfdn4Hto3iVdiDlUYXM',
+        range: 'RASTREIO!A1:B100', // Substitua com o nome da aba e o intervalo apropriados
     }).then(function(response) {
         const values = response.result.values;
         let resultado = "Nota fiscal não encontrada.";
@@ -25,4 +34,6 @@ function pesquisarNotaFiscal() {
 
         document.getElementById('resultado').textContent = resultado;
     });
+}
+
 }
